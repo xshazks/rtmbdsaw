@@ -3,8 +3,13 @@ package rtmsaw
 import (
 	"fmt"
 	"testing"
+	"github.com/aiteung/atdb"
 )
 
+var MongoInfo = atdb.DBInfo{
+	DBString: MongoString,
+	DBName:   "dbmonitor",
+}
 
 func TestInsertmonitor(t *testing.T) {
 	proker := "Melakukan maintance website"

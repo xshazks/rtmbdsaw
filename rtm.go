@@ -34,7 +34,7 @@ func Insertmonitor(proker string, status string, about string, karyawan string) 
 	rtmdb.Status = status
 	rtmdb.About = about
 	rtmdb.Karyawan = karyawan
-	return InsertOneDoc("Monitor", "rtmdb", rtmdb)
+	return InsertOneDoc("dbmonitor", "rtmdb", rtmdb)
 }
 
 func GetDatamonitor(targetselesai string) (data []Monitor) {

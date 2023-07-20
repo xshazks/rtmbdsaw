@@ -38,7 +38,7 @@ func Insertmonitor(proker string, status string, about string, karyawan string) 
 }
 
 func GetDatamonitor(targetselesai string) (data []Monitor) {
-	user := MongoConnect("Monitor").Collection("rtmdb")
+	user := MongoConnect("dbmonitor").Collection("rtmdb")
 	filter := bson.M{"targetselesai": targetselesai}
 	cursor, err := user.Find(context.TODO(), filter)
 	if err != nil {

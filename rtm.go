@@ -35,9 +35,36 @@ func Insertmonitor(db *mongo.Database, proker string, status string, about strin
 	rtmdb.Karyawan = karyawan
 	return InsertOneDoc(db, "rtmdb", rtmdb)
 }
-func GetDatamonitor(ket string) (data []Monitor) {
-	user := MongoConnect("dbmonitor").Collection("karyawan")
-	filter := bson.M{"about": ket}
+func GetDatamonitor(status string) (data []Monitor) {
+	user := MongoConnect("dbmonitor").Collection("rtmdb")
+	filter := bson.M{"status": status}
+	cursor, err := user.Find(context.TODO(), filter)
+	if err != nil {
+		fmt.Println("GetDataMonitor :", err)
+	}
+	err = cursor.All(context.TODO(), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return
+}
+
+func GetDatakaryawan(karyawan string) (data []Monitor) {
+	user := MongoConnect("dbmonitor").Collection("rtmdb")
+	filter := bson.M{"karyawan": karyawan}
+	cursor, err := user.Find(context.TODO(), filter)
+	if err != nil {
+		fmt.Println("GetDatakaryawan :", err)
+	}
+	err = cursor.All(context.TODO(), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return
+}
+func GetDataproker(proker string) (data []Monitor) {
+	user := MongoConnect("dbmonitor").Collection("rtmdb")
+	filter := bson.M{"proker": proker}
 	cursor, err := user.Find(context.TODO(), filter)
 	if err != nil {
 		fmt.Println("GetDataMonitor :", err)

@@ -21,3 +21,21 @@ func TestInsertmonitor(t *testing.T) {
 	hsl := Insertmonitor(MongoConn, proker, status, about, karyawan)
 	fmt.Println(hsl)
 }
+
+func TestGetDatakaryawan(t *testing.T) {
+	karyawan := "Acep Suhendar"
+	dt := GetDatakaryawan(karyawan)
+	fmt.Println(dt)
+}
+
+func TestGetDatamonitor(t *testing.T) {
+	status := "Dalam pengerjaan"
+	dt := GetDatamonitor(status)
+	fmt.Println(dt)
+}
+
+func TestGetDataproker(t *testing.T) {
+	about := "Melakukan maintance website"
+	dt := GetDataproker(about)
+	fmt.Println(dt)
+}

@@ -35,7 +35,7 @@ func Insertmonitor(db *mongo.Database, proker string, status string, about strin
 	rtmdb.Karyawan = karyawan
 	return InsertOneDoc(db, "rtmdb", rtmdb)
 }
-func GetDataDafdir(ket string) (data []Monitor) {
+func GetDatamonitor(ket string) (data []Monitor) {
 	user := MongoConnect("dbmonitor").Collection("karyawan")
 	filter := bson.M{"about": ket}
 	cursor, err := user.Find(context.TODO(), filter)

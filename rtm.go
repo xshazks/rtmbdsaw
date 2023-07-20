@@ -20,26 +20,24 @@ func MongoConnect(dbname string) (db *mongo.Database) {
 	return client.Database(dbname)
 }
 
-func InsertOneDoc(db string, collection string, doc interface{}) (insertedID interface{}) {
-	insertResult, err := MongoConnect(db).Collection(collection).InsertOne(context.TODO(), doc)
+func InsertOneDoc(db *mongo.Database, collection string, doc interface{}) (insertedID interface{}) {
+	insertResult, err := db.Collection(collection).InsertOne(context.TODO(), doc)
 	if err != nil {
 		fmt.Printf("InsertOneDoc: %v\n", err)
 	}
 	return insertResult.InsertedID
 }
-
-func Insertmonitor(proker string, status string, about string, karyawan string) (InsertedID interface{}) {
+func Insertmonitor(db *mongo.Database, proker string, status string, about string, karyawan string) (InsertedID interface{}) {
 	var rtmdb Monitor
 	rtmdb.Proker = proker
 	rtmdb.Status = status
 	rtmdb.About = about
 	rtmdb.Karyawan = karyawan
-	return InsertOneDoc("dbmonitor", "rtmdb", rtmdb)
+	return InsertOneDoc(db, "rtmdb", rtmdb)
 }
-
-func GetDatamonitor(targetselesai string) (data []Monitor) {
-	user := MongoConnect("dbmonitor").Collection("rtmdb")
-	filter := bson.M{"targetselesai": targetselesai}
+func GetDataDafdir(ket string) (data []Monitor) {
+	user := MongoConnect("dbmonitor").Collection("karyawan")
+	filter := bson.M{"about": ket}
 	cursor, err := user.Find(context.TODO(), filter)
 	if err != nil {
 		fmt.Println("GetDataMonitor :", err)

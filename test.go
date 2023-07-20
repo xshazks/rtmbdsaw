@@ -11,11 +11,13 @@ var MongoInfo = atdb.DBInfo{
 	DBName:   "dbmonitor",
 }
 
+var MongoConn = atdb.MongoConnect(MongoInfo)
+
 func TestInsertmonitor(t *testing.T) {
 	proker := "Melakukan maintance website"
 	status := "Dalam pengerjaan"
 	about := "Memperbaiki website karena terdapat kendala"
 	karyawan := "Acep Suhendar"
-	hsl := Insertmonitor(proker, status, about, karyawan)
+	hsl := Insertmonitor(MongoConn, proker, status, about, karyawan)
 	fmt.Println(hsl)
 }

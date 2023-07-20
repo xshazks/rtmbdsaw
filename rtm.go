@@ -20,20 +20,20 @@ func MongoConnect(dbname string) (db *mongo.Database) {
 	return client.Database(dbname)
 }
 
-func InsertOneDoc(db *mongo.Database, collection string, doc interface{}) (insertedID interface{}) {
-	insertResult, err := db.Collection(collection).InsertOne(context.TODO(), doc)
+func InsertOneDoc(db string, collection string, doc interface{}) (insertedID interface{}) {
+	insertResult, err := MongoConnect(db).Collection(collection).InsertOne(context.TODO(), doc)
 	if err != nil {
 		fmt.Printf("InsertOneDoc: %v\n", err)
 	}
 	return insertResult.InsertedID
 }
-func Insertmonitor(db *mongo.Database, proker string, status string, about string, karyawan string) (InsertedID interface{}) {
+func Insertmonitor(proker string, status string, about string, karyawan string) (InsertedID interface{}) {
 	var rtmdb Monitor
 	rtmdb.Proker = proker
 	rtmdb.Status = status
 	rtmdb.About = about
-	rtmdb.Karyawan = karyawan
-	return InsertOneDoc(db, "rtmdb", rtmdb)
+	rtmdb.Karyawan = karyawan 
+	return InsertOneDoc("dbmonitor", "rtmdb", rtmdb)
 }
 func GetDatamonitor(status string) (data []Monitor) {
 	user := MongoConnect("dbmonitor").Collection("rtmdb")

@@ -18,7 +18,7 @@ func TestInsertmonitor(t *testing.T) {
 	status := "Dalam pengerjaan"
 	about := "Memperbaiki website karena terdapat kendala"
 	karyawan := "Acep Suhendar"
-	hsl := Insertmonitor(MongoConn, proker, status, about, karyawan)
+	hsl := Insertmonitor(proker, status, about, karyawan)
 	fmt.Println(hsl)
 }
 
